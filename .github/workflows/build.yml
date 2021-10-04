@@ -12,15 +12,19 @@ jobs:
           fetch-depth: 1
 
       - name: Composer dependencies
+        working-directory: ./aufgabe-b
         run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
       - name: Prepare Laravel Application
+        working-directory: ./aufgabe-b
         run: |
           cp .env.example .env
           php artisan key:generate
       - name: Run Testsuite
+        working-directory: ./aufgabe-b
         run: vendor/bin/phpunit tests/
       - name: Docker Run
+        working-directory: ./aufgabe-b
         run: ./vendor/bin/sail up
       - name: Login azure
         uses: azure/docker-login@v1
