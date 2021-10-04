@@ -30,7 +30,7 @@ jobs:
           username: idi2019
           password: IAB70oHU0bJTNfDnHA/H4a/eVQTvky0M
       - name: Init compose.sh
-        run: chmod +x ./aufgabe-b/compose.sh
+        run: chmod +x ./aufgabe-b
         working-directory: ./aufgabe-b
       - name: Run docker
         run: ./aufgabe-b/compose.sh build-$GITHUB_RUN_NUMBER idi2019.azurecr.io
