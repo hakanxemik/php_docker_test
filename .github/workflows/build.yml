@@ -23,9 +23,6 @@ jobs:
       - name: Run Testsuite
         working-directory: ./aufgabe-b
         run: vendor/bin/phpunit tests/
-      - name: Docker Run
-        working-directory: ./aufgabe-b
-        run: ./vendor/bin/sail up
       - name: Login azure
         uses: azure/docker-login@v1
         with:
