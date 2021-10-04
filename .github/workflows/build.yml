@@ -20,6 +20,9 @@ jobs:
         run: |
           cp .env.example .env
           php artisan key:generate
+      - name: Migrate Models
+        working-directory: ./aufgabe-b
+        run: php artisan migrate
       - name: Run Testsuite
         working-directory: ./aufgabe-b
         run: vendor/bin/phpunit tests/
@@ -27,10 +30,11 @@ jobs:
         uses: azure/docker-login@v1
         with:
           login-server: idi2019.azurecr.io
-          username: idi2019
-          password: IAB70oHU0bJTNfDnHA/H4a/eVQTvky0M
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
       - name: Init compose.sh
-        run: chmod +x ./aufgabe-b
         working-directory: ./aufgabe-b
+        run: chmod +x compose.sh
       - name: Run docker
-        run: ./aufgabe-b/compose.sh build-$GITHUB_RUN_NUMBER idi2019.azurecr.io
+        working-directory: ./aufgabe-b
+        run: compose.sh build-$GITHUB_RUN_NUMBER idi2019.azurecr.io

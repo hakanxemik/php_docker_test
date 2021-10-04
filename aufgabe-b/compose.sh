@@ -11,13 +11,13 @@ else
     REGISTRY="$2"
 fi
 
-# 1. Container bauen
+# 1. Container build
 docker build -t aufgabe_b:$TAG .
 
-# 2. Container taggen
+# 2. Container tag
 docker tag aufgabe_b:$TAG $REGISTRY/ssc-aufgabe_b:latest
 docker tag aufgabe_b:$TAG $REGISTRY/ssc-aufgabe_b:$TAG
 
-# 3. Container pushen
+# 3. Container push registry
 docker push $REGISTRY/ssc-aufgabe_b:latest
 docker push $REGISTRY/ssc-aufgabe_b:$TAG
