@@ -27,8 +27,8 @@ jobs:
         uses: azure/docker-login@v1
         with:
           login-server: idi2019.azurecr.io
-          username: ${{ secrets.secrets.USERNAME }}
-          password: ${{ secrets.secrets.PASSWORD }}
+          username: idi2019
+          password: IAB70oHU0bJTNfDnHA/H4a/eVQTvky0M
       - name: Init compose.sh
         run: chmod +x ./aufgabe-b/compose.sh
         working-directory: ./aufgabe-b
