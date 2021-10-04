@@ -1,0 +1,35 @@
+name: build
+
+on: push
+
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Composer dependencies
+        run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+
+      - name: Prepare Laravel Application
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+      - name: Run Testsuite
+        run: vendor/bin/phpunit tests/
+      - name: Docker Run
+        run: ./vendor/bin/sail up
+      - name: Login azure
+        uses: azure/docker-login@v1
+        with:
+          login-server: idi2019.azurecr.io
+          username: ${{ secrets.USER }}
+          password: ${{ secrets.PASSWORD }}
+      - name: Init compose.sh
+        run: chmod +x ./aufgabe-b/compose.sh
+        working-directory: ./aufgabe-b
+      - name: Run docker
+        run: ./aufgabe-b/compose.sh build-$GITHUB_RUN_NUMBER idi2019.azurecr.io
