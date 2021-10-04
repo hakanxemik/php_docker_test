@@ -22,7 +22,7 @@ jobs:
           php artisan key:generate
       - name: Migrate Models
         working-directory: ./aufgabe-b
-        run: php artisan migrate
+        run: vendor/bin/sail artisan migrate
       - name: Run Testsuite
         working-directory: ./aufgabe-b
         run: vendor/bin/phpunit tests/
